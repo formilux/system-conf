@@ -18,11 +18,6 @@
 FAIL_DELAY		3
 
 #
-# Enable additional passwords upon dialup lines specified in /etc/dialups.
-#
-DIALUPS_CHECK_ENAB	yes
-
-#
 # Enable logging and display of /var/log/faillog login failure info.
 #
 FAILLOG_ENAB		yes

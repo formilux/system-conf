@@ -1,3 +1,7 @@
+2004/12/10 : 0.1.13
+  - removed obsolete "DIALUP_CHECK_ENAB" from login.defs because
+    it does not exist anymore in recent util-linux.
+  - added a few options to the default logrotate.conf
 2004/08/08 : 0.1.12
   - /etc/{z,}profile: fixed impossibility to use a value with a space
     in a variable
