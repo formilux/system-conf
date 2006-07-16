@@ -23,3 +23,5 @@ etc/inittab 0:4 640
 etc/login.defs 0:4 640
 etc/protocols 0:4 644
 etc/profile 0:4 755
+etc/syslog-ng 0:0 755
+etc/syslog-ng/syslog-ng.conf 0:4 640
