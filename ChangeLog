@@ -9,3 +9,7 @@
   - added 'firewall' group 16
   - updated default syslog-ng.conf
   - added more config examples to config.rc
+2003/10/02
+  - added 'set bell-style none' to inputrc
+  - made etc/profile.d/formilux.* act before others
+  - formilux.var now initializes MANPATH

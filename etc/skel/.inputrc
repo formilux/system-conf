@@ -3,6 +3,7 @@
 set meta-flag on
 set convert-meta off
 set output-meta on
+set bell-style none
 # This is for command line editing
 "\e[3~":delete-char
 "\e[1~":beginning-of-line
