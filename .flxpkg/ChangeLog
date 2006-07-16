@@ -1,0 +1,31 @@
+2004/12/11 00:48  root@wtap
+
+	* released system-conf-0.1.13-flx0.1
+	* removed obsolete "DIALUP_CHECK_ENAB" from login.defs because
+	  it does not exist anymore in recent util-linux.
+	* added a few options to the default logrotate.conf
+
+2004/08/08 01:14  root@wtap
+
+	* released system-conf-0.1.12-flx0.1
+	* /etc/{z,}profile: fixed impossibility to use a space in value
+	  specified in /etc/profile.d/*.var
+	* changed groups netpkt, netraw, netport to gids 91,92,93 to avoid
+	  conflicts with smmsp (18 in sendmail). BTW, those groups had not
+	  been used yet.
+
+2004/05/31 22:30  willy@wtap
+
+	* released system-conf-0.1.11-flx0.1
+	* added a default 'modules.conf'
+	* changed arch from 'i586' to 'noarch'
+
+2004/05/30 20:27  willy@wtap
+
+	* released system-conf-0.1.10-flx0.1
+	* added groups 'netpkt' (17), 'netraw' (18), 'netport' (19) to
+	  support pspa and remove setuid bits on programs such as ping,
+	  traceroute, and several servers
+	* added lots of pre-configured sections into the default config.rc,
+	  with some default sysctls.
+
