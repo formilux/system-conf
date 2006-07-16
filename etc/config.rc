@@ -11,8 +11,9 @@ section system
    hostname formilux
    sysctl kernel.panic=30
 
-# ip address <ip/mask> [secondary]  # address for this interface
-# slave eth0 eth1 eth2 ...          # enslave these interfaces
+# ip address <ip/mask> [secondary]	# add an address to this interface
+# ip route <ip/mask|default> <gateway>	# define a route
+# slave eth0 eth1 eth2 ...		# bind these interfaces
 service network eth0
    #modprobe
    #media 100full
@@ -20,7 +21,10 @@ service network eth0
    ip address 172.16.0.1/24
    ip address 192.168.0.1/24
 
-service highsock
+no service network bond0
+   #modprobe bond0 mode=active_backup
+   #slave eth0 eth1
+   #ip address 10.0.0.1/16
 
 service syslog-ng
 
@@ -32,21 +36,31 @@ service keyboard
    keyrate 30
    
 service mouse
-  type ps2
-  device /dev/psaux
+   type ps2
+   device /dev/psaux
+
+no service crond
+
+no service highsock
 
 no service ntp
 
 no service apache
 
-service sshd
+no service sshd
+   #config /etc/ssh/sshd_config
+   #protocol 2
+   #port 22
+   #listen 0.0.0.0
 
 no service thttpd
-  port 80
-  docroot /home/www
-  user proxy
+   #port 80
+   #docroot /home/www
+   #user http
 
 no service pdnsd 
 
 no service echelogd
+   #config  /etc/echelog/echelog.conf
+   #runas   echelogc:daemon
 
