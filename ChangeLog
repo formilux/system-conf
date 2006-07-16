@@ -1,3 +1,6 @@
+2006/02/10 : 0.1.14
+  - changed "keymap fr" for "keymap fr-pc" in default config to support
+    accents.
 2004/12/10 : 0.1.13
   - removed obsolete "DIALUP_CHECK_ENAB" from login.defs because
     it does not exist anymore in recent util-linux.

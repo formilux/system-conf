@@ -93,7 +93,7 @@ no service sshd
    #listen 0.0.0.0
 
 service keyboard
-   keymap fr
+   keymap fr-pc
    keyrate 30
    
 service mouse
