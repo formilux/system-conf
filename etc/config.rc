@@ -9,8 +9,14 @@
 
 section system
    hostname formilux
+   #modprobe softdog soft_margin=30 nowayout=1
+   #modprobe pppoe
    sysctl kernel.panic=30
    sysctl kernel.ctrl-alt-del=0
+   sysctl net.ipv4.conf.default.arp_announce=2
+   sysctl net.ipv4.conf.all.arp_announce=2
+   sysctl net.ipv4.conf.default.arp_ignore=1
+   sysctl net.ipv4.conf.all.arp_ignore=1
    sysctl net.ipv4.conf.default.accept_redirects=0
    sysctl net.ipv4.conf.all.accept_redirects=0
    sysctl net.ipv4.conf.default.send_redirects=0
@@ -20,6 +26,10 @@ section system
    sysctl net.ipv4.conf.default.log_martians=1
    sysctl net.ipv4.conf.all.log_martians=1
    sysctl net.ipv4.icmp_echo_ignore_broadcasts=1
+   sysctl net.ipv4.ip_nonlocal_bind=1
+   sysctl net.core.sock_packet_gid=17
+   sysctl net.ipv4.ip_sock_raw_gid=18
+   sysctl net.ipv4.ip_port_acl_gid=19
    sysctl kernel.core_pattern="/var/core/core.%e.uid%u.sig%s"
 
 # ip address <ip/mask> [secondary]	# add an address to this interface
@@ -34,22 +44,53 @@ service network eth0
    ip address 10.0.0.1/16
    ip address 172.16.0.1/24
    ip address 192.168.0.1/24
+   vrrp address 10.0.0.3
+   vrrp prio 101
+   vrrp id 100
+   vrrp garp 30
 
 no service network bond0
    #modprobe bond0 mode=active-backup
    #slave eth0 eth1
    #ip address 10.0.0.1/16
 
-no service firewall
-   conntrack max=4194304
+no service network tun0
+   modprobe ipip
+   load ip tunnel add tun0 mode ipip remote 192.168.1.2
+   ip address 192.168.0.1/30
+   unload ip tunnel del tun0
+
+no service adsl
+   no autostart
+   account customer@provider
+   device eth0
+   #check_interval 60
+   #no defaultroute
+   #mtu 1492
+   #mru 1492
+
+service firewall
+   no autostart
+   conntrack max=1048576
+   hashsize 131072
+   conntrack tcp_timeout_time_wait=90
+   conntrack tcp_timeout_last_ack=90
+   conntrack tcp_timeout_close=30
 
 service syslog-ng
+   console 4
    #nice -18
    #config /etc/syslog-ng/syslog-ng.conf
    #chain klogd
 
 service klogd
    no autostart # launched automatically by syslog-ng if needed
+
+no service sshd
+   #config /etc/ssh/sshd_config
+   #protocol 2
+   #port 22
+   #listen 0.0.0.0
 
 service keyboard
    keymap fr
@@ -68,12 +109,6 @@ no service ntp
 
 no service apache
 
-no service sshd
-   #config /etc/ssh/sshd_config
-   #protocol 2
-   #port 22
-   #listen 0.0.0.0
-
 no service thttpd
    #port 80
    #docroot /home/www
@@ -84,4 +119,12 @@ no service pdnsd
 no service echelogd
    #config  /etc/echelog/echelog.conf
    #runas   echelogc:daemon
+
+service vrrp
+   no autostart
+   group eth0 eth1 eth2 eth3
+   notify /sbin/init.d/vrrp_notify
+
+no service nagios
+
 
