@@ -13,3 +13,8 @@
   - added 'set bell-style none' to inputrc
   - made etc/profile.d/formilux.* act before others
   - formilux.var now initializes MANPATH
+2003/12/13
+  - fixed a bug in profile.d/formilux.var affecting the initialization of
+    LD_LIBRARY_PATH, and which could result in it ending with a ':', thus
+    opening a security hole.
+  - changed default syslog-ng.conf to write audit messages to /var/log/messages
