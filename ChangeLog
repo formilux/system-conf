@@ -3,3 +3,4 @@
     accidental reboots, and branch to init instead.
   - added sysctls to disable icmp redirects by default
   - fixed 'active-backup' typo in bonding configuration
+  - added 'log' group 22
