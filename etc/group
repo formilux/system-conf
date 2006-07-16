@@ -14,6 +14,7 @@ mail:x:12:mail
 news:x:13:news
 uucp:x:14:uucp
 man:x:15:
+firewall:x:16:
 games:x:20:
 log:x:22:
 gdm:x:42:

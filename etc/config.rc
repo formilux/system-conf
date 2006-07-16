@@ -15,12 +15,21 @@ section system
    sysctl net.ipv4.conf.all.accept_redirects=0
    sysctl net.ipv4.conf.default.send_redirects=0
    sysctl net.ipv4.conf.all.send_redirects=0
+   sysctl net.ipv4.conf.default.accept_source_route=0
+   sysctl net.ipv4.conf.all.accept_source_route=0
+   sysctl net.ipv4.conf.default.log_martians=1
+   sysctl net.ipv4.conf.all.log_martians=1
+   sysctl net.ipv4.icmp_echo_ignore_broadcasts=1
+   sysctl kernel.core_pattern="/var/core/core.%e.uid%u.sig%s"
 
 # ip address <ip/mask> [secondary]	# add an address to this interface
 # ip route <ip/mask|default> <gateway>	# define a route
 # slave eth0 eth1 eth2 ...		# bind these interfaces
 service network eth0
    #modprobe
+   #speed 100
+   #duplex full
+   #auto off
    #media 100full
    ip address 10.0.0.1/16
    ip address 172.16.0.1/24
@@ -31,10 +40,16 @@ no service network bond0
    #slave eth0 eth1
    #ip address 10.0.0.1/16
 
+no service firewall
+   conntrack max=4194304
+
 service syslog-ng
+   #nice -18
+   #config /etc/syslog-ng/syslog-ng.conf
+   #chain klogd
 
 service klogd
-   no autostart # launched automatically by syslog-ng
+   no autostart # launched automatically by syslog-ng if needed
 
 service keyboard
    keymap fr
@@ -49,6 +64,7 @@ no service crond
 no service highsock
 
 no service ntp
+   #force_sync
 
 no service apache
 

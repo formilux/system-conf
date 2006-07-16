@@ -4,3 +4,8 @@
   - added sysctls to disable icmp redirects by default
   - fixed 'active-backup' typo in bonding configuration
   - added 'log' group 22
+2003/09/15
+  - added etc/firewall
+  - added 'firewall' group 16
+  - updated default syslog-ng.conf
+  - added more config examples to config.rc

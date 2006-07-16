@@ -2,6 +2,7 @@ etc/nsswitch.conf 0:4 644
 etc/mtab 0:4 640
 etc/skel 0:0 755
 etc/skel/.inputrc 0:4 644
+etc/firewall 0:16 750
 etc/fstab 0:4 640
 etc/group 0:4 644
 etc/hosts 0:4 644
