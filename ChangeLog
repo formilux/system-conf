@@ -1,0 +1,5 @@
+2003/06/17
+  - added 'sysctl kernel.ctrl-alt-del=0' to config.rc to prevent
+    accidental reboots, and branch to init instead.
+  - added sysctls to disable icmp redirects by default
+  - fixed 'active-backup' typo in bonding configuration

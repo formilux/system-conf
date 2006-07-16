@@ -10,6 +10,11 @@
 section system
    hostname formilux
    sysctl kernel.panic=30
+   sysctl kernel.ctrl-alt-del=0
+   sysctl net.ipv4.conf.default.accept_redirects=0
+   sysctl net.ipv4.conf.all.accept_redirects=0
+   sysctl net.ipv4.conf.default.send_redirects=0
+   sysctl net.ipv4.conf.all.send_redirects=0
 
 # ip address <ip/mask> [secondary]	# add an address to this interface
 # ip route <ip/mask|default> <gateway>	# define a route
@@ -22,7 +27,7 @@ service network eth0
    ip address 192.168.0.1/24
 
 no service network bond0
-   #modprobe bond0 mode=active_backup
+   #modprobe bond0 mode=active-backup
    #slave eth0 eth1
    #ip address 10.0.0.1/16
 
