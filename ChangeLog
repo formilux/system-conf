@@ -1,3 +1,11 @@
+2004/05/31 : 0.1.11
+  - added a default 'modules.conf'
+2004/05/30 : 0.1.10
+  - added groups 'netpkt' (17), 'netraw' (18), 'netport' (19) to
+    support pspa and remove setuid bits on programs such as ping,
+    traceroute, and several servers
+  - added lots of pre-configured sections into the default config.rc,
+with some default sysctls.
 2003/06/17
   - added 'sysctl kernel.ctrl-alt-del=0' to config.rc to prevent
     accidental reboots, and branch to init instead.

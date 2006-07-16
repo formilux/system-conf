@@ -12,6 +12,7 @@ etc/termcap 0:4 644
 etc/lilo.conf 0:4 640
 etc/logrotate.d 0:0 755
 etc/logrotate.conf 0:4 640
+etc/modules.conf 0:4 640
 etc/zprofile 0:4 755
 etc/passwd 0:0 644
 etc/shadow 0:0 600
