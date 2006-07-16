@@ -2,19 +2,30 @@
 
 if [ -d /etc/profile.d ] ; then
 
-  for file in /etc/profile.d/*.zsh ; do
-    if [ -x $file ] ; then . $file ; fi
+  list=( /etc/profile.d/*.zsh )
+  if [ "${list[*]##*/formilux.zsh}" != "${list[*]}" ]; then
+	list=( /etc/profile.d/formilux.zsh ${list[@]##*/formilux.zsh} )
+  fi
+  for file in "${list[@]}"; do
+    if [ -x "$file" ] ; then . "$file" ; fi
   done
 
-  for file in /etc/profile.d/*.var ; do
+  list=( /etc/profile.d/*.var )
+  if [ "${list[*]##*/formilux.var}" != "${list[*]}" ]; then
+	list=( /etc/profile.d/formilux.var ${list[@]##*/formilux.var} )
+  fi
+  for file in "${list[@]}"; do
     while read ; do
       case $REPLY in
-        *[^+]=*) set -- `echo "$REPLY" | sed 's/=/ /'`
-                eval "$1=$2" ; export $1 ;;
-        *+=*) set -- `echo "$REPLY" | sed 's/+=/ /'`
-                eval "$1=\${$1}:$2"; export $1 ;;
+        *[^+]=*)
+           var=${REPLY%%=*}; eval "$var=${REPLY#*=}"
+           export $var ;;
+        *+=*)
+           var=${REPLY%%+=*}; eval "$var=\"\${$var:+\${$var}:}${REPLY#*=}\""  
+           export $var ;;
       esac
-    done < $file
+    done < "$file"
   done
 
 fi
+unset file list REPLY

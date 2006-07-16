@@ -6,23 +6,25 @@ if [ -d /etc/profile.d ] ; then
   if [ "${list[*]##*/formilux.sh}" != "${list[*]}" ]; then
 	list=( /etc/profile.d/formilux.sh ${list[@]##*/formilux.sh} )
   fi
-  for file in ${list[@]}; do
-    if [ -x $file ] ; then . $file ; fi
+  for file in "${list[@]}"; do
+    if [ -x "$file" ] ; then . "$file" ; fi
   done
 
   list=( /etc/profile.d/*.var )
   if [ "${list[*]##*/formilux.var}" != "${list[*]}" ]; then
 	list=( /etc/profile.d/formilux.var ${list[@]##*/formilux.var} )
   fi
-  for file in ${list[@]}; do
+  for file in "${list[@]}"; do
     while read ; do
       case $REPLY in
-        *[^+]=*) set -- `echo "$REPLY" | sed 's/=/ /'`
-                eval "$1=$2" ; export $1 ;;
-        *+=*) set -- `echo "$REPLY" | sed 's/+=/ /'`
-                eval "$1=\${$1:+\${$1}:}$2"; export $1 ;;
+        *[^+]=*)
+           var=${REPLY%%=*}; eval "$var=${REPLY#*=}"
+           export $var ;;
+        *+=*)
+           var=${REPLY%%+=*}; eval "$var=\"\${$var:+\${$var}:}${REPLY#*=}\""  
+           export $var ;;
       esac
-    done < $file
+    done < "$file"
   done
 
 fi

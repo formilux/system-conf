@@ -27,9 +27,9 @@ section system
    sysctl net.ipv4.conf.all.log_martians=1
    sysctl net.ipv4.icmp_echo_ignore_broadcasts=1
    sysctl net.ipv4.ip_nonlocal_bind=1
-   sysctl net.core.sock_packet_gid=17
-   sysctl net.ipv4.ip_sock_raw_gid=18
-   sysctl net.ipv4.ip_port_acl_gid=19
+   sysctl net.core.sock_packet_gid=91
+   sysctl net.ipv4.ip_sock_raw_gid=92
+   sysctl net.ipv4.ip_port_acl_gid=93
    sysctl kernel.core_pattern="/var/core/core.%e.uid%u.sig%s"
 
 # ip address <ip/mask> [secondary]	# add an address to this interface

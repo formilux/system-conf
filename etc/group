@@ -15,12 +15,12 @@ news:x:13:news
 uucp:x:14:uucp
 man:x:15:
 firewall:x:16:
-netpkt:x:17:
-netraw:x:18:
-netport:x:19:
 games:x:20:
 log:x:22:
 gdm:x:42:
+netpkt:x:91:
+netraw:x:92:
+netport:x:93:
 nogroup:x:98:
 nobody:x:99:nobody
 users:x:100:

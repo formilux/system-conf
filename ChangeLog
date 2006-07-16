@@ -1,3 +1,9 @@
+2004/08/08 : 0.1.12
+  - /etc/{z,}profile: fixed impossibility to use a value with a space
+    in a variable
+  - changed groups netpkt, netraw, netport to gids 91,92,93 to avoid
+    conflicts with smmsp (18 in sendmail). BTW, those groups had not
+    been used yet.
 2004/05/31 : 0.1.11
   - added a default 'modules.conf'
 2004/05/30 : 0.1.10
