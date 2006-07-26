@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ -d /etc/profile.d ] ; then
+
+  for file in /etc/profile.d/*.sh ; do
+    if [ -x $file ] ; then . $file ; fi
+  done
+
+  for file in /etc/profile.d/*.var ; do
+    while read ; do
+      case $REPLY in
+        *[^+]=*) set -- `echo "$REPLY" | sed 's/=/ /'`
+                eval "$1=$2" ; export $1 ;;
+        *+=*) set -- `echo "$REPLY" | sed 's/+=/ /'`
+                eval "$1=\${$1}:$2"; export $1 ;;
+      esac
+    done < $file
+  done
+
+fi

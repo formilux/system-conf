@@ -1,0 +1,8 @@
+/dev/root		/		ext3	defaults,auto		1 1
+/dev/boot		/boot		ext3	defaults,auto,ro	0 0
+/proc			/proc		proc	defaults,noauto		0 0
+/dev/pts		/dev/pts	devpts	gid=5,mode=620		0 0
+/dev/swap		swap		swap	defaults,auto		0 0
+/dev/cdrom		/mnt/cdrom	iso9660	defaults,noauto,ro	0 0
+/dev/fs/var		/var		ext3	defaults,auto		1 2
+/dev			/dev		tmpfs	size=0,nr_inodes=4096,remount,mode=0755	0 0

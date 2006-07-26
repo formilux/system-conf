@@ -1,0 +1,52 @@
+# description de la configuration
+# no service ... 		inhibe le service
+# service <nom du service>      demarre le service avec le parametre "start"
+#   <variable> <valeur>		assigne une valeur
+#   <variable>			positionne la variable
+#   no <variable>		désactive la variable
+#   install			cree l'environnement de travail du service
+#   disable			inhibe le "start", mais pas l'install
+
+section system
+   hostname formilux
+   sysctl kernel.panic=30
+
+# ip address <ip/mask> [secondary]  # address for this interface
+# slave eth0 eth1 eth2 ...          # enslave these interfaces
+service network eth0
+   #modprobe
+   #media 100full
+   ip address 10.0.0.1/16
+   ip address 172.16.0.1/24
+   ip address 192.168.0.1/24
+
+service highsock
+
+service syslog-ng
+
+service klogd
+   no autostart # launched automatically by syslog-ng
+
+service keyboard
+   keymap fr
+   keyrate 30
+   
+service mouse
+  type ps2
+  device /dev/psaux
+
+no service ntp
+
+no service apache
+
+service sshd
+
+no service thttpd
+  port 80
+  docroot /home/www
+  user proxy
+
+no service pdnsd 
+
+no service echelogd
+

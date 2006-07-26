@@ -1,0 +1,5 @@
+PKGROOT=/mnt/cdrom/pkg
+LYNX_CFG=/etc/lynx.cfg
+PATH=$HOME/bin:$PATH
+LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
+
